@@ -2,18 +2,18 @@ package com.cj.rdt;
 
 import java.io.*;
 
-public class ReadOnlyRDTObject extends RDTObject<Object> {
+public class ReadOnlyRDTObject<T> extends RDTObject<T> {
 
 	public ReadOnlyRDTObject(ReadOnlyRDTFile f) throws IOException {
-		super();
+		super(f);
 		f.tryVersion();
 	}
 
-	@Override
-	public Object getObject() {
-		throw new UnsupportedOperationException("Get Object");
+	public ReadOnlyRDTObject(T sobj, ReadOnlyRDTFile f) throws IOException {
+		super(sobj, f);
+		f.tryVersion();
 	}
-
+	
 	@Override
 	public ReadOnlyRDTFile getRDTFile() {
 		return (ReadOnlyRDTFile) super.getRDTFile();
