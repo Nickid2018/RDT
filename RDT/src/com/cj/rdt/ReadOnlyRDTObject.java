@@ -28,9 +28,13 @@ public class ReadOnlyRDTObject<T> extends RDTObject<T> {
 		RDTWarn warn = RDTWarn.create();
 		DataInputStream input = f.getInput();
 		// Read
-		while (input.available() > 0) {
-			RDTTagBase tag = f.getVersion().tryTag(f.getVersion().readNextTag(input));
-			warn.addWarn(tag.readTag(input, this));
+		try {
+			while (true) {
+				RDTTagBase tag = f.getVersion().tryTag(f.getVersion().readNextTag(input));
+				warn.addWarn(tag.readTag(input, this));
+			}
+		} catch (EOFException e) {
+			//To end
 		}
 		return warn.isNoWarn() ? RDTWarn.NO_WARN : warn;
 	}

@@ -51,9 +51,13 @@ public class RDTObject<T> {
 		input.readByte();
 		input.readByte();
 		// Read
-		while (input.available() > 0) {
-			RDTTagBase tag = f.getVersion().tryTag(f.getVersion().readNextTag(input));
-			warn.addWarn(tag.readTag(input, this));
+		try {
+			while (true) {
+				RDTTagBase tag = f.getVersion().tryTag(f.getVersion().readNextTag(input));
+				warn.addWarn(tag.readTag(input, this));
+			}
+		} catch (EOFException e) {
+			//To end
 		}
 		f.destoryInput();
 		return warn.isNoWarn() ? RDTWarn.NO_WARN : warn;
