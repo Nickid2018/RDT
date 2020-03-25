@@ -4,14 +4,14 @@ import java.io.*;
 
 import com.github.nickid2018.rdt.*;
 
-public class TagShort extends TagArrayable{
-	
-	public static final TagShort TAG_C_SHORT=new TagShort();
-	
+public class TagShort extends TagArrayable {
+
+	public static final TagShort TAG_C_SHORT = new TagShort();
+
 	private short v;
-	
+
 	public TagShort(short v) {
-		this.v=v;
+		this.v = v;
 	}
 
 	private TagShort() {
@@ -19,13 +19,13 @@ public class TagShort extends TagArrayable{
 
 	@Override
 	public RDTWarn readTag(DataInput inp, RDTObject<?> o) throws IOException {
-		v=inp.readShort();
+		v = inp.readShort();
 		return RDTWarn.NO_WARN;
 	}
 
 	@Override
 	public void writeTag(DataOutput oup, RDTObject<?> o) throws IOException {
-		//Sign write
+		// Sign write
 		oup.writeByte(o.getRDTFile().getVersion().getTagSign("TAG_SHORT"));
 		oup.writeShort(v);
 	}
@@ -36,19 +36,19 @@ public class TagShort extends TagArrayable{
 
 	@Override
 	public String toString() {
-		return v+"";
+		return v + "";
 	}
 
 	@Override
 	public void writeItem(DataOutput oup, RDTObject<?> o) throws IOException {
 		oup.writeShort(v);
 	}
-	
+
 	@Override
 	public TagShort createNew() {
 		return new TagShort();
 	}
-	
+
 	@Override
 	public String tagName() {
 		return "TAG_SHORT";

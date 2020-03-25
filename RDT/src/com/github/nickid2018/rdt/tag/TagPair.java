@@ -5,14 +5,14 @@ import java.io.*;
 import com.github.nickid2018.rdt.*;
 
 public class TagPair extends TagArrayable {
-	
-	public static final TagPair TAG_C_PAIR=new TagPair();
-	
-	private RDTTagBase k,v;
-	
-	public TagPair(RDTTagBase k,RDTTagBase v) {
-		this.k=k;
-		this.v=v;
+
+	public static final TagPair TAG_C_PAIR = new TagPair();
+
+	private RDTTagBase k, v;
+
+	public TagPair(RDTTagBase k, RDTTagBase v) {
+		this.k = k;
+		this.v = v;
 	}
 
 	private TagPair() {
@@ -35,10 +35,10 @@ public class TagPair extends TagArrayable {
 	@Override
 	public RDTWarn readTag(DataInput inp, RDTObject<?> o) throws IOException {
 		RDTWarn warn = RDTWarn.create();
-		byte tagSign=ver.readNextTag(inp);
+		byte tagSign = ver.readNextTag(inp);
 		k = ver.tryTag(tagSign);
 		warn.addWarn(k.readTag(inp, o));
-		tagSign=ver.readNextTag(inp);
+		tagSign = ver.readNextTag(inp);
 		v = ver.tryTag(tagSign);
 		warn.addWarn(v.readTag(inp, o));
 		return warn.isNoWarn() ? RDTWarn.NO_WARN : warn;
@@ -46,7 +46,7 @@ public class TagPair extends TagArrayable {
 
 	@Override
 	public void writeTag(DataOutput oup, RDTObject<?> o) throws IOException {
-		//Sign write
+		// Sign write
 		oup.writeByte(o.getRDTFile().getVersion().getTagSign("TAG_PAIR"));
 		k.writeTag(oup, o);
 		v.writeTag(oup, o);
@@ -64,7 +64,7 @@ public class TagPair extends TagArrayable {
 
 	@Override
 	public String toString() {
-		return k+"="+v;
+		return k + "=" + v;
 	}
 
 }

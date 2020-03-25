@@ -51,12 +51,12 @@ public class RDTContainerTag extends RDTTagBase {
 		}
 		// Read
 		while (((DataInputStream) inp).available() > 0) {
-			byte tagSign=ver.readNextTag(inp);
-			if (tagSign==RDTFile.TAG_END)
+			byte tagSign = ver.readNextTag(inp);
+			if (tagSign == RDTFile.TAG_END)
 				break;
 			RDTTagBase tag = ver.tryTag(tagSign);
 			warn.addWarn(tag.readTag(inp, o));
-			if(tagSign!=RDTFile.TAG_START)
+			if (tagSign != RDTFile.TAG_START)
 				r.read(tag, warn);
 			tags.add(tag);
 		}
@@ -80,7 +80,7 @@ public class RDTContainerTag extends RDTTagBase {
 	public void removeTag(RDTTagBase tag) {
 		tags.remove(tag);
 	}
-	
+
 	@Override
 	public RDTContainerTag createNew() {
 		return new RDTContainerTag();

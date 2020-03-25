@@ -56,7 +56,7 @@ public class RDTWalker extends JFrame {
 
 		fn = new JTextField();
 		fn.addActionListener(e -> {
-			
+
 		});
 		fn.setFont(new Font("Î¢ÈíÑÅºÚ", Font.PLAIN, 12));
 		panel.add(fn, BorderLayout.CENTER);

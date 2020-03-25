@@ -3,7 +3,7 @@ package com.github.nickid2018.rdt;
 public class VersionException extends RuntimeException {
 
 	public VersionException(int major, int minor) {
-		super("RDT Version is not exists:"+major+"."+minor);
+		super("RDT Version is not exists:" + major + "." + minor);
 	}
 
 	/**

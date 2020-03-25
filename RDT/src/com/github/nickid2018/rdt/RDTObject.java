@@ -57,7 +57,7 @@ public class RDTObject<T> {
 				warn.addWarn(tag.readTag(input, this));
 			}
 		} catch (EOFException e) {
-			//To end
+			// To end
 		}
 		f.destoryInput();
 		return warn.isNoWarn() ? RDTWarn.NO_WARN : warn;

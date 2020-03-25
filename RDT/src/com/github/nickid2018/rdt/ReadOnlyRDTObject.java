@@ -13,16 +13,17 @@ public class ReadOnlyRDTObject<T> extends RDTObject<T> {
 		super(sobj, f);
 		f.tryVersion();
 	}
-	
+
 	@Override
 	public ReadOnlyRDTFile getRDTFile() {
 		return (ReadOnlyRDTFile) super.getRDTFile();
 	}
 
 	private boolean read = false;
+
 	@Override
 	public RDTWarn read() throws IOException {
-		if(read)
+		if (read)
 			throw new UnsupportedOperationException("Read File Twice");
 		read = true;
 		RDTWarn warn = RDTWarn.create();
@@ -34,7 +35,7 @@ public class ReadOnlyRDTObject<T> extends RDTObject<T> {
 				warn.addWarn(tag.readTag(input, this));
 			}
 		} catch (EOFException e) {
-			//To end
+			// To end
 		}
 		return warn.isNoWarn() ? RDTWarn.NO_WARN : warn;
 	}
